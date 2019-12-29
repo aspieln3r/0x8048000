@@ -1,3 +1,7 @@
+/*
+ * A program that will read and print printable characters in it's memory given a memory address
+ * until it segfaults
+ */
 #define _GNU_SOURCE /* Bring REG_XXX names from /usr/include/sys/ucontext.h */
 
 #include <stdio.h>
@@ -17,7 +21,7 @@ void readmem(){
 	err=0;
 	printf("enter mem location:");
 	scanf("%lx",&loc);
-	printf("\nint loc(hex):%lx\n",loc);
+	printf("--dump begin--\n");			
 	char * addr = (void *) loc;
 	char ch;
 	label=&&l; 
@@ -71,7 +75,7 @@ static void sigaction_segv(int signal, siginfo_t *si, void *arg)
         ctx->uc_mcontext.gregs[REG_EIP] += 6;
     #endif 
 	err=1;
-	printf("%p\n",label);
+	printf("no of bytes read:%d\n",i);
 }
 
 
