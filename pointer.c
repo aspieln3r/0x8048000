@@ -94,12 +94,9 @@ int main () {
 		fprintf(stderr, "failed to setup SIGSEGV handler\n");
     		exit(1);
 	}
-	char c1[30]="cat /proc/";
-	char c2[]="/maps",pid[6];
-	sprintf(pid,"%d",getpid());
-	strcat (c1,pid);
-	strcat (c1,c2);
-	system(c1);
+	char c[25];
+	sprintf(c,"cat /proc/%d/maps",getpid());
+	system(c);
 	while(1){
 		readmem();
 	}
